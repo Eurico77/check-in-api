@@ -28,6 +28,7 @@ type Input = {
   email: string;
   password: string;
 };
+
 type Output = {
   user: User;
 };
