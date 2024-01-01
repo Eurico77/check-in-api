@@ -3,10 +3,14 @@ import { randomUUID } from 'crypto';
 import { UsersRepository } from '../users-repository';
 
 export class InMemoryUsersRepository implements UsersRepository {
-  private users: User[];
+  private users: User[] = [];
 
   constructor() {
     this.users = [];
+  }
+
+  async findById(id: string) {
+    return this.users.find((user) => user.id === id) ?? null;
   }
 
   async create({ email, name, passwordHash }: Prisma.UserCreateInput) {
