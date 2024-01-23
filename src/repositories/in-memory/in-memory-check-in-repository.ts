@@ -4,7 +4,21 @@ import { randomUUID } from 'node:crypto';
 import { CheckInsRepository } from '../check-in-repository';
 
 export class InMemoryCheckInsRepository implements CheckInsRepository {
-  private checkIns: CheckIn[] = [];
+  public checkIns: CheckIn[] = [];
+
+  async save(checkIn: CheckIn) {
+    const checkInInIndex = this.checkIns.findIndex(
+      (checkIn) => checkIn.id === checkIn.id
+    );
+
+    if (checkInInIndex >= 0) this.checkIns[checkInInIndex] = checkIn;
+
+    return checkIn;
+  }
+
+  async findById(checkInId: string) {
+    return this.checkIns.find((item) => item.id === checkInId) ?? null;
+  }
 
   async countByUserId(userId: string): Promise<number> {
     return this.checkIns.filter((checkIn) => checkIn.userId === userId).length;

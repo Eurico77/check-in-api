@@ -7,9 +7,8 @@ export function getDistanceBetweenCoordinates(
   from: Coordinate,
   to: Coordinate
 ) {
-  if (from.latitude === to.latitude && from.longitude === to.longitude) {
+  if (from.latitude === to.latitude && from.longitude === to.longitude)
     return 0;
-  }
 
   const fromRadian = (Math.PI * from.latitude) / 180;
   const toRadian = (Math.PI * to.latitude) / 180;
@@ -21,9 +20,7 @@ export function getDistanceBetweenCoordinates(
     Math.sin(fromRadian) * Math.sin(toRadian) +
     Math.cos(fromRadian) * Math.cos(toRadian) * Math.cos(radTheta);
 
-  if (dist > 1) {
-    dist = 1;
-  }
+  if (dist > 1) dist = 1;
 
   dist = Math.acos(dist);
   dist = (dist * 180) / Math.PI;
